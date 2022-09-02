@@ -1,59 +1,65 @@
 import React, { Component } from 'react';
-import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+
 import { getEvents, extractLocations } from './api';
+
+import './App.css';
 import './nprogress.css';
 
 class App extends Component {
-  state= {
-  events: [],
-  locations: []
-}
-updateEvents = (location) => {
-  if (numberOfEvents === undefined) {
-    numberOfEvents = this.state.numberOfEvents;
-} else(
-    this.setState({ numberOfEvents: numberOfEvents })
-)
-if (location === undefined) {
-    location = this.state.locationSelected;
-}
-console.log(numberOfEvents, location)
-  getEvents().then((events) => {
-    const locationEvents = (location === 'all') ?
-      events :
-      events.filter((event) => event.location === location);
-    this.setState({
-      events: locationEvents.slice(0, numberOfEvents),
-                numberOfEvents: numberOfEvents
+  updateEvents = (location, eventCount) => {
+    getEvents().then((events) => {
+        const locationEvents = (location === 'all') ? events
+            : (location) ? events.filter((event) => event.location === location)
+                : this.state.events;
+
+        if (eventCount) {
+            this.setState({
+                numberOfEvents: eventCount
+            });
+        }
+
+        if (eventCount < this.state.numberOfEvents) { locationEvents.length = this.state.numberOfEvents; }
+
+        this.setState({
+            events: locationEvents
+        });
+
     });
-  });
+}
+
+constructor() {
+    super();
+    this.state = {
+        events: [],
+        locations: [],
+        numberOfEvents: 32
+    }
+}
+
+render() {
+    const { events, locations, numberOfEvents } = this.state;
+
+    return (
+        <div className="App">
+            <CitySearch updateEvents={this.updateEvents} locations={locations} />
+            <NumberOfEvents numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
+            <EventList events={events} />
+        </div>
+    );
 }
 
 componentDidMount() {
-  this.mounted = true;
   getEvents().then((events) => {
-    if (this.mounted) {
-      this.setState({ events, locations: extractLocations(events) });
-    }
-  });
+    this.setState({ events, locations: extractLocations(events) });
+});
 }
 
 componentWillUnmount(){
   this.mounted = false;
 }
-
-  render() {
-    return (
-      <div className="App">
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <EventList events={this.state.events}/>
-        <NumberOfEvents updateEvents={this.updateEvents} events={this.state.events}/>
-      </div>
-    );
-  }
 }
 
 export default App;
