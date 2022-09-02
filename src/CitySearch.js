@@ -50,7 +50,7 @@ class CitySearch extends Component {
       onClick={() => this.handleItemClicked(suggestion)}
     >{suggestion}</li>
   ))}
-  <li onClick={() => this.handleItemClicked("all")}>
+  <li className="suggestions_see-all" key="all" onClick={() => this.handleItemClicked('all')}>
     <b>See all cities</b>
   </li>
 </ul>
