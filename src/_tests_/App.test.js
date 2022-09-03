@@ -12,10 +12,11 @@ describe('<App /> component', () => {
   let AppWrapper;
   beforeAll(() => {
     AppWrapper = shallow(<App />);
+    });
     test('render list of events', () => {expect(AppWrapper.find(EventList)).toHaveLength(1)});   
     test('render CitySearch', ()     => {expect(AppWrapper.find(CitySearch)).toHaveLength(1)});
     test('render NumberOfEvents', () => {expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1)});
-  });
+  
 
   describe('<App /> integration', () => {
    /* let AppWrapper;
