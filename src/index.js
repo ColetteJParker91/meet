@@ -12,3 +12,4 @@ const container = document.getElementById('root');
 const root = createRoot (container);
 root.render(<App tab="home" />);
 
+atatus.notify(new Error('Test Atatus Setup'));
