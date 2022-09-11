@@ -35,11 +35,11 @@ defineFeature(feature, test => {
         });
 
         when('the user clicks on that event', () => {
-            EventWrapper.find('.details-button').simulate('click');
+            EventWrapper.find('btn-toggle-details').simulate('click');
         });
 
         then('more details about that event should be shown', () => {
-            expect(EventWrapper.state('show')).toEqual(true);
+            expect(EventWrapper.state('collapsed')).toEqual(true);
         });
     });
 
@@ -50,15 +50,15 @@ defineFeature(feature, test => {
             EventWrapper.setState({
                 show: true
             });
-            expect(EventWrapper.state('show')).toBe(true);
+            expect(EventWrapper.state('collapsed')).toBe(true);
         });
 
         when('the user clicks on that event', () => {
-            EventWrapper.find('.details-button').simulate('click');
+            EventWrapper.find('btn-toggle-details').simulate('click');
         });
 
         then('the details should be hidden', () => {
-            expect(EventWrapper.state('show')).toEqual(false);
+            expect(EventWrapper.state('collapsed')).toEqual(false);
         });
     });
 });

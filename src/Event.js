@@ -19,6 +19,7 @@ toggleBtnText = () => {
 
 render() {
   const { event } = this.props;
+  const {show, buttonText } = this.state;
 
   return (
       <div className="event">
