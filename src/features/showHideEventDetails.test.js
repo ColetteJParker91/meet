@@ -23,7 +23,7 @@ defineFeature(feature, test => {
         then('all event elements should be collapsed', () => {
             AppWrapper.update();
             let EventWrapper = AppWrapper.find(Event);
-            EventWrapper.forEach((event) => expect(event.state('show')).toBe(false));
+            EventWrapper.forEach((event) => expect(event.state('collapsed')).toBe(true));
         });
     });
 
@@ -31,15 +31,15 @@ defineFeature(feature, test => {
         let EventWrapper;
         given('an event\'s details are hidden', () => {
             EventWrapper = shallow(<Event event={mockData[0]} />);
-            expect(EventWrapper.state('show')).toBe(false);
+            expect(EventWrapper.state('collapsed')).toBe(true);
         });
 
         when('the user clicks on that event', () => {
-            EventWrapper.find('btn-toggle-details').simulate('click');
+            EventWrapper.find('.btn-toggle-details').simulate('click');
         });
 
         then('more details about that event should be shown', () => {
-            expect(EventWrapper.state('collapsed')).toEqual(true);
+            expect(EventWrapper.state('collapsed')).toEqual(false);
         });
     });
 
@@ -54,7 +54,7 @@ defineFeature(feature, test => {
         });
 
         when('the user clicks on that event', () => {
-            EventWrapper.find('btn-toggle-details').simulate('click');
+            EventWrapper.find('.btn-toggle-details').simulate('click');
         });
 
         then('the details should be hidden', () => {
