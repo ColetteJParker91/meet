@@ -40,24 +40,42 @@ class App extends Component {
     }
 
     render() {
-        const { events, locations, numberOfEvents } = this.state;
+       const { events, locations, numberOfEvents, showWelcomeScreen } = this.state;
+
+        if (this.state.showWelcomeScreen === undefined) return <div
+        className="App" />
+
         return (
             <div className="App">
                 <CitySearch updateEvents={this.updateEvents} locations={locations} />
                 <NumberOfEvents numberOfEvents={numberOfEvents} updateEvents={this.updateEvents} />
                 <EventList events={events} />
+                <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen}
+getAccessToken={() => { getAccessToken() }} />
             </div>
         );
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.mounted = true;
+        const accessToken = localStorage.getItem('access_token');
+        const isTokenValid = (await checkToken(accessToken)).error ? false :
+        true;
+        const searchParams = new URLSearchParams(window.location.search);
+        const code = searchParams.get("code");
+        this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+        if ((code || isTokenValid) && this.mounted) {
         getEvents().then((events) => {
-            this.setState({ events, locations: extractLocations(events) });
+        if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+        }
         });
-    }
+        }
+        }
+
     componentWillUnmount() {
         this.mounted = false;
     }
+    
 }
 export default App;
