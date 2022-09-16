@@ -25,8 +25,7 @@ rel="nofollow noopener"
 class="btn-text"
 >
 <b>Sign in with google</b>
-</button>
-Page 1 
+</button> 
 </div>
 </div>
 <a
