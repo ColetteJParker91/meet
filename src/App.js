@@ -4,7 +4,9 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 
-import { getEvents, extractLocations } from './api';
+import WelcomeScreen from './WelcomeScreen';
+import { getEvents, extractLocations, checkToken, getAccessToken } from
+'./api';
 
 import './App.css';
 import './nprogress.css';
@@ -32,7 +34,8 @@ class App extends Component {
             events: [],
             locations: [],
             numberOfEvents: 32,
-            selectedLocation: 'all'
+            selectedLocation: 'all',
+            showWelcomeScreen: undefined
         }
     }
 
