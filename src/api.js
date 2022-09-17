@@ -1,8 +1,7 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
 import './nprogress.css';
-
-/*import { mockData } from './mock-data'; */
+import { mockData } from './mock-data';
 
 /**
  *
