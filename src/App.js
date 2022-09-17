@@ -88,7 +88,7 @@ class App extends Component {
 
 
     render() {
-        const { events, locations, numberOfEvents, showWelcomeScreen } = this.state;
+        const { showWelcomeScreen, events, locations, numberOfEvents,} = this.state;
 
         if (this.state.showWelcomeScreen === undefined)
       return <div className="App" />;
@@ -121,10 +121,8 @@ class App extends Component {
             <EventGenre events={this.state.events} />
           </div>
           <div className="scatter-wrapper">
-            <ResponsiveContainer>
+            <ResponsiveContainer width={400} height={400}>
               <ScatterChart
-                width={400}
-                height={400}
                 margin={{
                   top: 20,
                   right: 20,
@@ -140,7 +138,6 @@ class App extends Component {
                   name="Number of events"
                   allowDecimals={false}
                 />
-
                 <Tooltip cursor={{ strokeDasharray: "3 3" }} />
                 <Scatter data={this.getData()} fill="#8884d8" />
               </ScatterChart>
