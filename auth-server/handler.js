@@ -63,7 +63,8 @@ module.exports.getAccessToken = async (event) => {
             }
             return resolve(token);
         });
-    }).then((token) => {
+    })
+    .then((token) => {
         // Respond w OAuth token
         return {
             headers: {
@@ -111,7 +112,8 @@ module.exports.getCalendarEvents = async (event) => {
                 }
             }
         );
-    }).then((results) => {
+    })
+    .then((results) => {
         return {
             statusCode: 200,
             headers: {
