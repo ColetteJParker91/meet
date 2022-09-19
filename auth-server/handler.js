@@ -66,12 +66,18 @@ module.exports.getAccessToken = async (event) => {
     }).then((token) => {
         // Respond w OAuth token
         return {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
             statusCode: 200,
             body: JSON.stringify(token)
         };
     }).catch((err) => {
         console.error(err);
         return {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
             statusCode: 500,
             body: JSON.stringify(err)
         };
@@ -117,6 +123,9 @@ module.exports.getCalendarEvents = async (event) => {
         console.error(err);
         return {
             statusCode: 500,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
             body: JSON.stringify(err)
         };
     })
