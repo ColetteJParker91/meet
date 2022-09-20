@@ -34,10 +34,7 @@ collapsedEvent = () => {
   };
 
 toggleBtnText = () => {
-    return `${this.state.collapsed 
-        ? 'SHOW DETAILS' 
-        : 'HIDE DETAILS'
-    }`;
+  return `${this.state.buttonCollapsed ? "show" : "hide"} details`;
 };
 
 render() {
