@@ -18,18 +18,18 @@ toggleBtnText = () => {
 };
 
 render() {
-  const { event } = this.props;
-  const {show, buttonText } = this.state;
+  /*const { event } = this.props;
+  const {show, buttonText } = this.state; */
 
   return (
       <div className="event">
-          <h3 className="title">{event.summary}</h3>
+          <h3 className="title">{this.props.event.summary}</h3>
           <div className="fb-date-location">
               <p className="start-time">
-                  {event.start.dateTime.slice(0,10)}                  
+                  {this.props.event.start.dateTime.slice(0,10)}                  
               </p>
               
-              <p className="location">{event.location}</p>  
+              <p className="location">{this.props.event.location}</p>  
 
           </div>
 
@@ -40,7 +40,7 @@ render() {
           </button>            
           {!this.state.collapsed && (
               <div className="event-details">
-                  {event.description}                    
+                  {this.props.event.description}                    
               </div>                   
           )}               
       </div>

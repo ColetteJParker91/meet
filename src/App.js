@@ -88,7 +88,7 @@ class App extends Component {
 
 
     render() {
-        const { showWelcomeScreen, events, locations, numberOfEvents,} = this.state;
+       /* const { showWelcomeScreen, events, locations, numberOfEvents,} = this.state; */
 
         if (this.state.showWelcomeScreen === undefined)
     
