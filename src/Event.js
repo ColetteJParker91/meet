@@ -9,6 +9,29 @@ handleClick = () => {
     this.setState({ collapsed: !this.state.collapsed })
 };
 
+collapsedEvent = () => {
+    if (this.state.buttonCollapsed === false) {
+      return (
+        <div className="event-details">
+          <div className="description">
+            <h3>Description</h3>
+            <em>{this.props.event.description}</em>
+          </div>
+          <div className="creator">
+            <h4>e-mail:</h4>
+            <p>{this.props.event.creator.email}</p>
+          </div>
+          <h4>Date and Time:</h4>
+          <div className="start">
+            <p>{this.props.event.start.dateTime}</p>
+          </div>
+          <div className="end">
+            <p>{this.props.event.end.dateTime}</p>
+          </div>
+        </div>
+      );
+    }
+  };
 
 toggleBtnText = () => {
     return `${this.state.collapsed 

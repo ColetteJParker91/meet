@@ -25,8 +25,8 @@ const oAuth2Client = new google.auth.OAuth2(
   redirect_uris[0]
 );
 
+// Generate an URL
 module.exports.getAuthURL = async () => {
- 
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -71,7 +71,7 @@ module.exports.getAccessToken = async (event) => {
                 "Access-Control-Allow-Origin": "*",
               },
             statusCode: 200,
-            body: JSON.stringify(token)
+            body: JSON.stringify(token),
         };
     }).catch((err) => {
         console.error(err);
@@ -80,15 +80,15 @@ module.exports.getAccessToken = async (event) => {
                 "Access-Control-Allow-Origin": "*",
               },
             statusCode: 500,
-            body: JSON.stringify(err)
+            body: JSON.stringify(err),
         };
     });
 };
-module.exports.getCalendarEvents = async (event) => {
+module.exports.getCalendarEvents = (event) => {
     const oAuth2Client = new google.auth.OAuth2(
         client_id,
         client_secret,
-        redirect_uris[0]
+        redirect_uris
     );
 
     const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
@@ -114,20 +114,23 @@ module.exports.getCalendarEvents = async (event) => {
         );
     })
     .then((results) => {
+         // Respond with oAuth token
         return {
+            statusCode: 200,
             headers: {
                 "Access-Control-Allow-Origin": "*",
             },
-            statusCode: 200,
             body: JSON.stringify({ events: results.data.items })
         };
-    }).catch(err => {
-        console.error(err);
+    }).
+    catch(err => {
+          // Handle error
+        console.error(error);
         return {
+            statusCode: 500,
             headers: {
                 "Access-Control-Allow-Origin": "*",
               },
-            statusCode: 500,
             body: JSON.stringify(err)
         };
     })

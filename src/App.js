@@ -6,13 +6,19 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 
 import WelcomeScreen from './WelcomeScreen';
-import { getEvents, extractLocations, checkToken, getAccessToken } from
-'./api';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 import { OffLineAlert } from "./Alert";
 
 import './App.css';
 import './nprogress.css';
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,} from "recharts";
+import { 
+  ScatterChart, 
+  Scatter, 
+  XAxis, 
+  YAxis,
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer,} from "recharts";
 
 
 class App extends Component {
@@ -32,8 +38,7 @@ class App extends Component {
     async componentDidMount() {
         this.mounted = true;
         const accessToken = localStorage.getItem('access_token');
-        const isTokenValid = (await checkToken(accessToken)).error ? false :
-        true;
+        const isTokenValid = (await checkToken(accessToken)).error ? false : true;
         const searchParams = new URLSearchParams(window.location.search);
         const code = searchParams.get("code");
         this.setState({ showWelcomeScreen: !(code || isTokenValid) });
@@ -41,7 +46,8 @@ class App extends Component {
         getEvents().then((events) => {
         if (this.mounted) {
         this.setState({ events,
-             locations: extractLocations(events) });
+             locations: extractLocations(events),
+             });
         }
         });
         }
@@ -94,6 +100,7 @@ class App extends Component {
     
     return (
       <div className="App">
+        <div className="navbar"></div>
         <WelcomeScreen
           showWelcomeScreen={this.state.showWelcomeScreen}
           getAccessToken={() => {

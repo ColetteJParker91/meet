@@ -2,8 +2,7 @@ import React from "react";
 import './WelcomeScreen.css';
 
 function WelcomeScreen(props) {
- return props.showWelcomeScreen ?
-  (
+ return props.showWelcomeScreen ? (
   <div className="WelcomeScreen">
     <div className="login_cont">
      <div className="text_cont"></div>
@@ -28,14 +27,15 @@ function WelcomeScreen(props) {
 </button> 
 </div>
 </div>
+<footer>
 <a
 href="https://ColetteJParker91.github.io/meet/privacy.html"
 rel="nofollow noopener"
 >
 Privacy policy
 </a>
+</footer>
 </div>
-)
-: null
+ ): null
 }
 export default WelcomeScreen;
