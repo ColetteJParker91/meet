@@ -229,6 +229,7 @@ input[type="number"] {
 .pie-wrapper {
   min-width: 50vw;
   min-height: 50vh;
+  padding-left: 50px;
 }
 
 .scatter-wrapper {
